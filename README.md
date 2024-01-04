@@ -20,7 +20,7 @@ index.php?sensor=sensor2&value=15
 or
 index.php?sensor=sensor3&value=15
 ```
-- Example for ESP32 Code
+- Example use API for ESP32
 ```C
 #include <WiFi.h>
 #include <HTTPClient.h>
