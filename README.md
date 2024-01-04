@@ -1,5 +1,12 @@
 # Project Chart Sensor
 
+### Features
+- [x] Show realtime data sensor
+- [x] Show realtime chart
+- [x] Download data to csv
+- [x] API link to store data
+- [ ] Notification warning sensor 
+
 ### Clone Project
 ```
 git clone https://github.com/ASNProject/Project-Chart-Sensor.git
