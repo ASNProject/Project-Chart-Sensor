@@ -215,7 +215,51 @@
       $lastValueSensor3 = end($dataSensor3);
       $lastTimestampSensor3 = end($timestamp3);
 
-      // DOWNLOAD CSV
+      // CREATE API
+      // Fungsi untuk menambahkan data dari URL
+function addDataFromURL($sensorId, $value) {
+  global $koneksi;
+
+  // Simpan data ke database sesuai sensor
+  switch ($sensorId) {
+      case 'sensor1':
+          $query = "INSERT INTO sensor1 (value) VALUES ('$value')";
+          break;
+      case 'sensor2':
+          $query = "INSERT INTO sensor2 (value) VALUES ('$value')";
+          break;
+      case 'sensor3':
+          $query = "INSERT INTO sensor3 (value) VALUES ('$value')";
+          break;
+      default:
+          // Handle jika sensor tidak valid
+          echo "Invalid sensor ID";
+          exit();
+  }
+
+  // Eksekusi query
+  $result = mysqli_query($koneksi, $query);
+
+  // Berikan respons
+  if ($result) {
+      echo "Data added successfully";
+  } else {
+      echo "Failed to add data";
+  }
+}
+
+// Cek apakah ada parameter 'sensor' dalam URL
+if (isset($_GET['sensor'])) {
+  $sensorId = $_GET['sensor'];
+
+  // Ambil nilai dari parameter 'value' jika ada
+  $value = isset($_GET['value']) ? $_GET['value'] : null;
+
+  // Panggil fungsi untuk menambahkan data dari URL
+  addDataFromURL($sensorId, $value);
+} else {
+  echo "Invalid request";
+}
 
     ?>
     <script>
@@ -330,30 +374,27 @@
       );
       
       // DOWNLOAD DATA
+      // Fungsi untuk memicu unduhan untuk Sensor 3
       function downloadSensorData1() {
-      // Create a form element
       var form = document.createElement('form');
-      form.action = 'download.php'; // Replace 'download.php' with the actual path to your PHP script
+      form.action = 'download.php'; 
       form.method = 'POST';
 
-      // Add an input field for identifying which sensor's data to download
       var input = document.createElement('input');
       input.type = 'hidden';
       input.name = 'sensor';
-      input.value = 'sensor1'; // Use this value to identify which sensor's data to download in your PHP script
+      input.value = 'sensor1'; 
       form.appendChild(input);
 
-      // Append the form to the body
       document.body.appendChild(form);
 
-      // Submit the form
       form.submit();
 
-      // Remove the form from the body
       document.body.removeChild(form);
     }
-    // Add a click event listener to the download button for Sensor 1
     document.getElementById('downloadButton1').addEventListener('click', downloadSensorData1);
+    
+    // Fungsi untuk memicu unduhan untuk Sensor 2
     function downloadSensorData2() {
     var form = document.createElement('form');
     form.action = 'download.php';
