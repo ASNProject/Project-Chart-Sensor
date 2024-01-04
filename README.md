@@ -12,6 +12,11 @@
 git clone https://github.com/ASNProject/Project-Chart-Sensor.git
 ```
 
+### Run Project
+- Save project to `/XAMPP/htdocs/`
+- Open browser, open the `localhost/folder_project/index.php`
+  - Example : `localhost/Project Chart Sensor/index.php`
+
 ### Use API 
 ```
 index.php?sensor=sensor1&value=15
