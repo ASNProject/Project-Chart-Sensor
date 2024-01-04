@@ -124,7 +124,7 @@
       <div class="relative flex-col">
         <canvas class="p-10" id="chartLine1"></canvas>
         <button
-          href="#"
+          id="downloadButton1"
           class="mt-3 font-bold text-white bg-blue-400 rounded-lg px-5 py-3 text-xs mx-auto"
         >
           Download
@@ -144,7 +144,7 @@
       <div class="relative flex-col items-center justify-center">
         <canvas class="p-10" id="chartLine2"></canvas>
         <button
-          href="#"
+          id="downloadButton2"
           class="mt-3 font-bold text-white bg-blue-400 rounded-lg px-5 py-3 text-xs mx-auto"
         >
           Download
@@ -164,7 +164,7 @@
       <div class="relative flex-col items-center justify-center">
         <canvas class="p-10" id="chartLine3"></canvas>
         <button
-          href="#"
+          id="downloadButton3"
           class="mt-3 font-bold text-white bg-blue-400 rounded-lg px-5 py-3 text-xs mx-auto"
         >
           Download
@@ -214,6 +214,9 @@
       }
       $lastValueSensor3 = end($dataSensor3);
       $lastTimestampSensor3 = end($timestamp3);
+
+      // DOWNLOAD CSV
+
     ?>
     <script>
     // Format Time
@@ -226,15 +229,15 @@
     // Mengonversi ke format 12 jam
     const formattedTime = `${hours % 12 || 12}:${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds} ${hours >= 12 ? 'PM' : 'AM'}`;
 
-    return formattedTime;
+      return formattedTime;
     }
 
     function formatTimestampsToTime(timestamps) {
-    return timestamps.map(timestamp => {
+      return timestamps.map(timestamp => {
     const date = new Date(timestamp);
-    return date.toLocaleTimeString();
+      return date.toLocaleTimeString();
     });
-}
+    }
 
 
     // MENAMPILKAN DATA UNTUK SENSOR 1
@@ -325,6 +328,68 @@
         document.getElementById("chartLine3"),
         configLineChart3
       );
+      
+      // DOWNLOAD DATA
+      function downloadSensorData1() {
+      // Create a form element
+      var form = document.createElement('form');
+      form.action = 'download.php'; // Replace 'download.php' with the actual path to your PHP script
+      form.method = 'POST';
+
+      // Add an input field for identifying which sensor's data to download
+      var input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = 'sensor';
+      input.value = 'sensor1'; // Use this value to identify which sensor's data to download in your PHP script
+      form.appendChild(input);
+
+      // Append the form to the body
+      document.body.appendChild(form);
+
+      // Submit the form
+      form.submit();
+
+      // Remove the form from the body
+      document.body.removeChild(form);
+    }
+    // Add a click event listener to the download button for Sensor 1
+    document.getElementById('downloadButton1').addEventListener('click', downloadSensorData1);
+    function downloadSensorData2() {
+    var form = document.createElement('form');
+    form.action = 'download.php';
+    form.method = 'POST';
+
+    var input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = 'sensor';
+    input.value = 'sensor2';
+    form.appendChild(input);
+
+    document.body.appendChild(form);
+    form.submit();
+    document.body.removeChild(form);
+  }
+
+  document.getElementById('downloadButton2').addEventListener('click', downloadSensorData2);
+
+  // Fungsi untuk memicu unduhan untuk Sensor 3
+  function downloadSensorData3() {
+    var form = document.createElement('form');
+    form.action = 'download.php';
+    form.method = 'POST';
+
+    var input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = 'sensor';
+    input.value = 'sensor3';
+    form.appendChild(input);
+
+    document.body.appendChild(form);
+    form.submit();
+    document.body.removeChild(form);
+  }
+
+  document.getElementById('downloadButton3').addEventListener('click', downloadSensorData3);
     </script>
   </body>
 </html>
