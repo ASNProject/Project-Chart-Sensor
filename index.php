@@ -258,7 +258,7 @@ if (isset($_GET['sensor'])) {
   // Panggil fungsi untuk menambahkan data dari URL
   addDataFromURL($sensorId, $value);
 } else {
-  echo "Invalid request";
+  echo "";
 }
 
     ?>
