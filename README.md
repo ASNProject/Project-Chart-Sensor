@@ -5,7 +5,7 @@
 - [x] Show realtime chart
 - [x] Download data to csv
 - [x] API link to store data
-- [ ] Notification warning sensor 
+- [x] Notification warning sensor 
 
 ### Clone Project
 ```
