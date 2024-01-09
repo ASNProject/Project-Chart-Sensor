@@ -84,5 +84,6 @@ void loop() {
 
 
 ### Screenshot
-https://github.com/ASNProject/Project-Chart-Sensor/assets/49858542/7df74509-ae31-4588-853e-0e736e2de350
+https://github.com/ASNProject/Project-Chart-Sensor/assets/49858542/72fcae8f-c419-4a5d-805c-5e603d9b4ccf
+
 
