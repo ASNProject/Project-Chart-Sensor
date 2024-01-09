@@ -255,6 +255,9 @@ function addDataFromURL($sensorId, $value) {
       case 'sensor3':
           $query = "INSERT INTO sensor3 (value) VALUES ('$value')";
           break;
+      case 'status':
+          $query = "INSERT INTO status (value) VALUES ('$value')";
+          break;
       default:
           // Handle jika sensor tidak valid
           echo "Invalid sensor ID";
@@ -482,7 +485,7 @@ if (isset($_GET['sensor'])) {
       }, 2000);
     }
     else if (status === 'siaga2'){
-      $('.msg').text('Peringatan: Status bencana Waspada!');
+      $('.msg').text('Peringatan: Status bencana Siaga2!');
       $('.alert').addClass("show");
       $('.alert').removeClass("hide");
       $('.alert').addClass("showAlert");
