@@ -16,7 +16,7 @@ git clone https://github.com/ASNProject/Project-Chart-Sensor.git
 - Save project to `/XAMPP/htdocs/`
 - Import `chart_sensor.sql` from database folder to pypmyadmin/mysql
 - Open browser, run `localhost/folder_project/index.php`
-  - Example : `localhost/Project Chart Sensor/index.php`
+  - Example : `localhost/Project%20Chart%20Sensor/index.php`
 
 ### Use API 
 ```
