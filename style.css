@@ -28,7 +28,7 @@ body {
 body {
   display: grid;
   place-items: center;
-  overflow: hidden;
+  overflow: auto;
 }
 button {
   padding: 8px 16px;
