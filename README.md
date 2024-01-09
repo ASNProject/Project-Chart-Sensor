@@ -25,6 +25,8 @@ or
 index.php?sensor=sensor2&value=15
 or
 index.php?sensor=sensor3&value=15
+or
+index.php?sensor=status&value=siaga2
 ```
 - Example use API for ESP32
 ```C
