@@ -16,9 +16,13 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta http-equiv="refresh" content="5">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <style>
       .download-button {
         position: absolute;
@@ -30,7 +34,17 @@
   </head>
   <body>
     <div class="px-8 py-8">
-      <h1 class="text-3xl font-bold text-teal-700">Chart Sensor</h1>
+      <div class="alert hide">
+      <span class="fas fa-exclamation-circle"></span>
+         <span class="msg">Peringatan!</span>
+         <div class="close-btn">
+            <span class="fas fa-times"></span>
+         </div>
+      </div>
+      <div class="flex item-center">
+        <h1 class="text-3xl font-bold text-teal-700">Chart Sensor</h1>
+        <h1 id="status" class="ml-auto text-base self-center text-3xl text-teal-700">Status: </h1>
+      </div>
       <div class="container my-12 mx-auto px-4 md:px-12">
         <div class="flex flex-wrap -mx-1 lg:-mx-4">
           <!-- Column -->
@@ -215,6 +229,16 @@
       $lastValueSensor3 = end($dataSensor3);
       $lastTimestampSensor3 = end($timestamp3);
 
+      // GET DATA UNTUK STATUS
+      $dataStatus = [];
+      $data4 = mysqli_query($koneksi, "SELECT * FROM status");
+      while ($d = mysqli_fetch_array($data4)) {
+        $dataStatus[] = $d['value'];
+      }
+      $lastValueStatus = end($dataStatus);
+
+    // http://127.0.0.1/Project%20Chart%20Sensor/
+
       // CREATE API
       // Fungsi untuk menambahkan data dari URL
 function addDataFromURL($sensorId, $value) {
@@ -283,7 +307,6 @@ if (isset($_GET['sensor'])) {
     });
     }
 
-
     // MENAMPILKAN DATA UNTUK SENSOR 1
       document.getElementById('sensorValue1').textContent = '<?php echo $lastValueSensor1; ?> cm';
       document.getElementById('time1').textContent = formatDate('<?php echo $lastTimestampSensor1; ?>');
@@ -338,6 +361,9 @@ if (isset($_GET['sensor'])) {
           },
         ],
       };
+
+      document.getElementById('status').textContent = 'Status: <?php echo $lastValueStatus; ?>';
+
 
       // SETTING CHART
       const configLineChart1 = {
@@ -431,6 +457,41 @@ if (isset($_GET['sensor'])) {
   }
 
   document.getElementById('downloadButton3').addEventListener('click', downloadSensorData3);
+
+  /// NOTIFIKASI STATUS
+    var status = '<?php echo $lastValueStatus; ?>';
+
+    if (status === 'waspada'){
+      $('.msg').text('Peringatan: Status bencana Waspada!');
+      $('.alert').addClass("show");
+      $('.alert').removeClass("hide");
+      $('.alert').addClass("showAlert");
+      setTimeout(function(){
+        $('.alert').removeClass("show");
+             $('.alert').addClass("hide");
+      }, 2000);
+    }
+    else if (status === 'siaga1'){
+      $('.msg').text('Peringatan: Status bencana Siaga1!');
+      $('.alert').addClass("show");
+      $('.alert').removeClass("hide");
+      $('.alert').addClass("showAlert");
+      setTimeout(function(){
+        $('.alert').removeClass("show");
+             $('.alert').addClass("hide");
+      }, 2000);
+    }
+    else if (status === 'siaga2'){
+      $('.msg').text('Peringatan: Status bencana Waspada!');
+      $('.alert').addClass("show");
+      $('.alert').removeClass("hide");
+      $('.alert').addClass("showAlert");
+      setTimeout(function(){
+        $('.alert').removeClass("show");
+             $('.alert').addClass("hide");
+      }, 2000);
+    }
     </script>
   </body>
 </html>
+ 
